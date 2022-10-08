@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.domain;
 
 /**
  * Racing 시 사용할 숫자값 Wrapping 클래스
