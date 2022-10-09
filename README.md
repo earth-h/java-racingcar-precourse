@@ -37,3 +37,14 @@
   ```
 4. 자동차 이름 지정 로직 테스트
   * 자동차 이름이 1~5자 사이인지 테스트
+5. 여러 자동차에 대해 시도할 횟수동안의 결과 반환 테스트
+  ```java
+    List<RacingCarName> racingCarNames = new ArrayList<>(Arrays.asList(new RacingCarName("bob"), new RacingCarName("kebin")));
+    List<String> readNumbers = Arrays.asList("135", "249", "021");
+    List<RacingCar> racingCars = new ArrayList<>();
+    for(int idx = 0; idx < 3; idx++) {
+        // 실재로는 랜덤 수이지만, 테스트를 위해 ReadLineNumberGenerator 생성해서 직접 값 넣어서 테스트
+        racingCars.add(new RacingCar(new RacingTime(3), new ReadLineNumberGenerater(readNumbers.get(idx)), racingCarNames.get(idx)));
+    }
+    Map<RacingCarName, RacingResult> racingResults = play(racingCars); // RacingCar 클래스 내 static 메소드로 play 구현
+  ```

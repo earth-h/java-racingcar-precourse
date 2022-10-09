@@ -3,7 +3,9 @@ package racingcar.domain;
 import static racingcar.domain.RacingNumber.convertToRacingNumber;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RacingCar {
 
@@ -28,5 +30,13 @@ public class RacingCar {
             racingStatusList.add(RacingStatus.checkStatus(racingNumber));
         }
         return racingStatusList;
+    }
+
+    public static Map<RacingCarName, RacingResult> play(List<RacingCar> racingCars) {
+        Map<RacingCarName, RacingResult> racingResults = new HashMap<>();
+        for(RacingCar racingCar: racingCars) {
+            racingResults.put(racingCar.racingCarName, new RacingResult(racingCar.play()));
+        }
+        return racingResults;
     }
 }
