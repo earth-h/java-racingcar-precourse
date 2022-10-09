@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import racingcar.constant.ErrorCode;
+
 public class RacingCarName {
 
     private static final int MAX_CAR_NAME = 5;
@@ -14,10 +16,10 @@ public class RacingCarName {
 
     private void validateRacingCarNameLength(String racingCarName) {
         if(racingCarName.length() > MAX_CAR_NAME) {
-            throw new IllegalArgumentException("[ERROR] 자동차 이름은 5자 이하여야 합니다.");
+            throw new IllegalArgumentException(ErrorCode.자동차_이름은_5자_이하.getErrorMessage());
         }
         if(racingCarName.length() < MIN_CAR_NAME) {
-            throw new IllegalArgumentException("[ERROR] 자동차 이름은 비어있을 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.자동차_이름은_비어있을_수_없음.getErrorMessage());
         }
     }
 }

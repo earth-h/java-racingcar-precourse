@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import racingcar.constant.ErrorCode;
 
 public class RacingCar {
 
@@ -20,7 +21,7 @@ public class RacingCar {
 
     private void validateRacingNumbersLength(RacingTime racingTime) {
         if(racingNumbers.size() != racingTime.getRacingTime()) {
-            throw new IllegalArgumentException("전진하는 조건 횟수만큼 숫자가 생성되지 않았습니다.");
+            throw new IllegalArgumentException(ErrorCode.RACING_TIME만큼_숫자가_생성되지_않음.getErrorMessage());
         }
     }
 

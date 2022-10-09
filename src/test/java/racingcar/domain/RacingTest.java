@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import racingcar.constant.ErrorCode;
 
 class RacingTest {
 
@@ -25,6 +26,6 @@ class RacingTest {
     void 숫자가_0보다_작거나_9보다_클_경우_오류_발생(int racingNumber) {
         assertThatThrownBy(() -> {
             RacingStatus.checkStatus(new RacingNumber(racingNumber));
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage("[ERROR] 전진하는 조건은 0과 9 사이의 값이어야 합니다.");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorCode.전진하는_조건은_0과_9_사이_값.getErrorMessage());
     }
 }

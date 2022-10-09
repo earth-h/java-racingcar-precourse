@@ -2,6 +2,7 @@ package racingcar.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import racingcar.constant.ErrorCode;
 
 /**
  * Racing 시 사용할 숫자값 Wrapping 클래스
@@ -21,7 +22,7 @@ public class RacingNumber {
 
     private void validateRacingNumber(int racingNumber) {
         if(racingNumber < MIN_NUM || racingNumber > MAX_NUM) {
-            throw new IllegalArgumentException("[ERROR] 전진하는 조건은 0과 9 사이의 값이어야 합니다.");
+            throw new IllegalArgumentException(ErrorCode.전진하는_조건은_0과_9_사이_값.getErrorMessage());
         }
     }
 

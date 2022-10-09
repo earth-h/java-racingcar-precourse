@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import racingcar.constant.ErrorCode;
 
 class RacingTimeTest {
 
@@ -13,7 +14,7 @@ class RacingTimeTest {
     void 레이싱_횟수는_양의_정수가_아니면_오류를_반환한다(int count) {
         assertThatThrownBy(() -> {
             new RacingTime(count);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage("[ERROR] 레이싱을 시도할 횟수는 0보다 큰 양의 정수여야 합니다.");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorCode.레이싱을_시도할_횟수는_0보다_큰_양수.getErrorMessage());
     }
 
     @ParameterizedTest
