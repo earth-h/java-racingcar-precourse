@@ -53,3 +53,11 @@
 ```
 7. 전진일 경우 - 반환, 멈춤일 경우 빈 문자열 반환 로직 테스트
 8. 자동차 이름 쉼표(,) 단위로 split 테스트
+9. 자동차 경주 최종 우승 테스트
+   * 실제로는 랜덤 수가 들어가기 때문에, 아래와 같이 임의로 List로 RacingCar 받아서 racing 한 번 수행한 후 결과 테스트
+```java
+    racingCarList.get(0).racing(new RacingNumber(5));
+    racingCarList.get(1).racing(new RacingNumber(3));
+    RacingCars racingCars = new RacingCars(racingCarList);
+    assertThat(racingCars.findWinners()).isEqualTo("bob");
+```

@@ -18,18 +18,21 @@ public class RacingCar {
         this.racingCarLocation = new RacingCarLocation();
     }
 
-    public RacingCarLocation getCurrentLocation() {
-        return racingCarLocation;
+    public int getCurrentLocation() {
+        return racingCarLocation.getLocation();
     }
 
-    public String playRacing(RacingNumber racingNumber) {
+    public void racing(RacingNumber racingNumber) {
         this.racingCarLocation.updateLocation(RacingStatus.checkStatus(racingNumber));
-        return printCurrentRacingLocation();
     }
 
     public String printCurrentRacingLocation() {
         List<String> currentRacingLocation = Arrays.asList(racingCarName.getRacingCarName(),
                 printRacingStatus(racingCarLocation));
         return convertListToString(currentRacingLocation, PRINT_CURRENT_RACING_LOCATION);
+    }
+
+    public String getRacingCarName() {
+        return racingCarName.getRacingCarName();
     }
 }
