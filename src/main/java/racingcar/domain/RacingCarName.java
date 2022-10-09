@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import racingcar.constant.ErrorCode;
 
 public class RacingCarName {
@@ -20,6 +22,22 @@ public class RacingCarName {
         }
         if(racingCarName.length() < MIN_CAR_NAME) {
             throw new IllegalArgumentException(ErrorCode.자동차_이름은_비어있을_수_없음.getErrorMessage());
+        }
+    }
+
+    public static List<RacingCarName> convertRacingCarNames(String racingCarName) {
+        String[] convertCarNames = racingCarName.split(",");
+        validateSplitCarName(convertCarNames);
+        List<RacingCarName> racingCarNames = new ArrayList<>();
+        for(String name: convertCarNames) {
+            racingCarNames.add(new RacingCarName(name));
+        }
+        return racingCarNames;
+    }
+
+    private static void validateSplitCarName(String[] convertCarNames) {
+        if(convertCarNames.length < 1) {
+            throw new IllegalArgumentException(ErrorCode.유효한_자동차_이름_없음.getErrorMessage());
         }
     }
 }
