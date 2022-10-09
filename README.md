@@ -28,3 +28,11 @@
 1. 단일 숫자에 대해 3 이하일 경우 멈춤, 4 이상일 경우 전진 로직 테스트 
 2. 랜덤 숫자 생성 로직 테스트
   * 랜덤 숫자 범위 테스트 및 생성 개수 테스트
+3. 단일 자동차에 대해 시도할 횟수동안의 결과 반환 테스트
+  ```java
+    // 시도 횟수 받아서 그 횟수만큼 랜덤 수 갖는 RacingCar 객체 생성
+    // 실재로는 랜덤 수이지만, 테스트를 위해 ReadLineNumberGenerator 생성해서 직접 값 넣어서 테스트
+    RacingCar racingCar = new RacingCar(new RacingTime(int racingTime), new ReadLineNumberGenerater(Arrays.asList(...))); 
+    List<RacingStatus> racingResult = racingCar.play(); // RacingCar 객체의 실행결과를 담은 리스트 반환
+  ```
+

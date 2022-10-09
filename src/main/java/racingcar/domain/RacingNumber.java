@@ -1,5 +1,8 @@
 package racingcar.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Racing 시 사용할 숫자값 Wrapping 클래스
  */
@@ -24,5 +27,13 @@ public class RacingNumber {
 
     public boolean isForward() {
         return this.racingNumber >= MIN_FORWARD;
+    }
+
+    public static List<RacingNumber> convertToRacingNumber(List<Integer> numbers) {
+        List<RacingNumber> racingNumbers = new ArrayList<>();
+        for(int number: numbers) {
+            racingNumbers.add(new RacingNumber(number));
+        }
+        return racingNumbers;
     }
 }
