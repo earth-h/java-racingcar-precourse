@@ -8,10 +8,12 @@ import java.util.List;
 public class RacingCar {
 
     private final List<RacingNumber> racingNumbers;
+    private final RacingCarName racingCarName;
 
-    public RacingCar(RacingTime racingTime, NumberGenerator numberGenerator) {
+    public RacingCar(RacingTime racingTime, NumberGenerator numberGenerator, RacingCarName racingCarName) {
         racingNumbers = convertToRacingNumber(numberGenerator.generateNumber(racingTime));
         validateRacingNumbersLength(racingTime);
+        this.racingCarName = racingCarName;
     }
 
     private void validateRacingNumbersLength(RacingTime racingTime) {
