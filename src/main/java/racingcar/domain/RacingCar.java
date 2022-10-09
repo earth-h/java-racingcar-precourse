@@ -24,18 +24,18 @@ public class RacingCar {
         }
     }
 
-    public List<RacingStatus> play() {
+    public RacingResult play() {
         List<RacingStatus> racingStatusList = new ArrayList<>();
         for(RacingNumber racingNumber: racingNumbers) {
             racingStatusList.add(RacingStatus.checkStatus(racingNumber));
         }
-        return racingStatusList;
+        return new RacingResult(racingStatusList);
     }
 
-    public static Map<RacingCarName, RacingResult> play(List<RacingCar> racingCars) {
+    public static Map<RacingCarName, RacingResult> playRacingGame(List<RacingCar> racingCars) {
         Map<RacingCarName, RacingResult> racingResults = new HashMap<>();
         for(RacingCar racingCar: racingCars) {
-            racingResults.put(racingCar.racingCarName, new RacingResult(racingCar.play()));
+            racingResults.put(racingCar.racingCarName, racingCar.play());
         }
         return racingResults;
     }

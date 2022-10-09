@@ -1,7 +1,7 @@
 package racingcar.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.domain.RacingCar.play;
+import static racingcar.domain.RacingCar.playRacingGame;
 import static racingcar.domain.RacingStatus.FORWARD;
 import static racingcar.domain.RacingStatus.STOP;
 
@@ -21,7 +21,7 @@ public class RacingCarTest {
         for(int idx = 0; idx < 3; idx++) {
             racingCars.add(new RacingCar(new RacingTime(3), new ReadLineNumberGenerater(readNumbers.get(idx)), racingCarNames.get(idx)));
         }
-        Map<RacingCarName, RacingResult> racingResults = play(racingCars);
+        Map<RacingCarName, RacingResult> racingResults = playRacingGame(racingCars);
         assertThat(racingResults.get(racingCarNames.get(0))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(STOP, STOP, FORWARD)));
         assertThat(racingResults.get(racingCarNames.get(1))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(STOP, STOP, STOP)));
         assertThat(racingResults.get(racingCarNames.get(2))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(FORWARD, FORWARD, FORWARD)));
@@ -30,7 +30,7 @@ public class RacingCarTest {
     @Test
     void 단일_자동차의_경주_결과_확인() {
         RacingCar racingCar = new RacingCar(new RacingTime(3),  new ReadLineNumberGenerater("529"), new RacingCarName("bob"));
-        List<RacingStatus> racingResult = racingCar.play();
-        assertThat(racingResult).isEqualTo(Arrays.asList(FORWARD, STOP, FORWARD));
+        RacingResult racingResult = racingCar.play();
+        assertThat(racingResult).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(FORWARD, STOP, FORWARD)));
     }
 }
