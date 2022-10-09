@@ -1,6 +1,10 @@
 package racingcar.domain;
 
 import static racingcar.domain.RacingStatus.printRacingStatus;
+import static racingcar.utils.StringUtils.convertListToString;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class RacingCar {
 
@@ -24,8 +28,8 @@ public class RacingCar {
     }
 
     public String printCurrentRacingLocation() {
-        StringBuilder stringBuilder = new StringBuilder().append(racingCarName.getRacingCarName()).append(PRINT_CURRENT_RACING_LOCATION);
-        stringBuilder.append(printRacingStatus(racingCarLocation));
-        return stringBuilder.toString();
+        List<String> currentRacingLocation = Arrays.asList(racingCarName.getRacingCarName(),
+                printRacingStatus(racingCarLocation));
+        return convertListToString(currentRacingLocation, PRINT_CURRENT_RACING_LOCATION);
     }
 }

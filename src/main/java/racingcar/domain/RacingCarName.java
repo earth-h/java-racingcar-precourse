@@ -1,11 +1,14 @@
 package racingcar.domain;
 
+import static racingcar.utils.StringUtils.convertStringToArray;
+
 import java.util.ArrayList;
 import java.util.List;
 import racingcar.constant.ErrorCode;
 
 public class RacingCarName {
 
+    private static final String CAR_NAME_DELIMITER = ",";
     private static final int MAX_CAR_NAME = 5;
     private static final int MIN_CAR_NAME = 1;
 
@@ -30,7 +33,7 @@ public class RacingCarName {
     }
 
     public static List<RacingCarName> convertRacingCarNames(String racingCarName) {
-        String[] convertCarNames = racingCarName.split(",");
+        String[] convertCarNames = convertStringToArray(racingCarName, CAR_NAME_DELIMITER);
         validateSplitCarName(convertCarNames);
         List<RacingCarName> racingCarNames = new ArrayList<>();
         for(String name: convertCarNames) {
