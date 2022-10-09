@@ -60,6 +60,7 @@ public class RacingCarController {
     }
 
     private void playRacing(RacingTime racingTime, RacingCars racingCars) {
+        printEmptyLine();
         printRacingResultDirection();
         for(int time = 0; time < racingTime.getRacingTime(); time++) {
             printCurrentRacingResult(racingCars.playRacing());
