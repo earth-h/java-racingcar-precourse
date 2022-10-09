@@ -13,6 +13,14 @@ import racingcar.constant.ErrorCode;
 public class RacingCarNameTest {
 
     @ParameterizedTest
+    @CsvSource(value = {"dup,dup", "bibi,bibi,cari"}, delimiter = ':')
+    void 자동차_이름이_중복되면_오류_발생(String carNames) {
+        assertThatThrownBy(() -> {
+            convertRacingCarNames(carNames);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorCode.자동차_이름_중복.getErrorMessage());
+    }
+
+    @ParameterizedTest
     @CsvSource(value = {",", ",,,"}, delimiter = ':')
     void 쉼표로_구분된_자동차_이름을_split한_array가_비어있으면_오류_발생(String carNames) {
         assertThatThrownBy(() -> {
@@ -21,7 +29,7 @@ public class RacingCarNameTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"bob,,bana"}, delimiter = ':')
+    @CsvSource(value = {"bob,,bana", ",aaa", ",aaa,,bd,,,"}, delimiter = ':')
     void 쉼표로_구분된_자동차_이름을_split할_때_비어있는_자동차_이름이_있으면_오류_발생(String carNames) {
         assertThatThrownBy(() -> {
             convertRacingCarNames(carNames);
