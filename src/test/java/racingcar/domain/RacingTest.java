@@ -12,7 +12,7 @@ class RacingTest {
     @ParameterizedTest
     @CsvSource(value = {"4", "5", "6", "7", "8", "9"}, delimiter = ':')
     void 숫자가_4_이상_9_이하일_경우_멈춤(int racingNumber) {
-        assertThat(RacingStatus.checkStatus(new RacingNumber(racingNumber))).isEqualTo(RacingStatus.FORWARD);
+        assertThat(RacingStatus.checkStatus(new RacingNumber(racingNumber))).isEqualTo(RacingStatus.MOVING_FORWARD);
     }
 
     @ParameterizedTest

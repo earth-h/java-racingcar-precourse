@@ -3,7 +3,7 @@ package racingcar.domain;
 public enum RacingStatus {
 
     STOP(""),
-    FORWARD("-");
+    MOVING_FORWARD("-");
 
     private final String racingStatusValue;
 
@@ -12,20 +12,20 @@ public enum RacingStatus {
     }
 
     public boolean isForward() {
-        return this == FORWARD;
+        return this == MOVING_FORWARD;
     }
 
     public static String printRacingStatus(RacingCarLocation racingCarLocation) {
         StringBuilder stringBuilder = new StringBuilder();
         for(int cnt = 0; cnt < racingCarLocation.getLocation(); cnt++) {
-            stringBuilder.append(FORWARD.racingStatusValue);
+            stringBuilder.append(MOVING_FORWARD.racingStatusValue);
         }
         return stringBuilder.toString();
     }
 
     public static RacingStatus checkStatus(RacingNumber racingNumber) {
         if(racingNumber.isForward()) {
-            return RacingStatus.FORWARD;
+            return RacingStatus.MOVING_FORWARD;
         }
         return RacingStatus.STOP;
     }
