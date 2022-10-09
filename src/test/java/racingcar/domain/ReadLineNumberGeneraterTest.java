@@ -22,7 +22,7 @@ class ReadLineNumberGeneraterTest {
     void 입력받은_숫자_개수가_racingTime과_다르면_오류_발생() {
         ReadLineNumberGenerater readLineNumberGenerater = new ReadLineNumberGenerater("035");
         assertThatThrownBy(() -> {
-            readLineNumberGenerater.generateNumber(new RacingTime(2));
+            readLineNumberGenerater.generateNumber(new RacingTime("2"));
         }).isInstanceOf(IllegalArgumentException.class).hasMessage(ErrorCode.RACING_TIME만큼_숫자를_입력하지_않음.getErrorMessage());
     }
 
@@ -31,7 +31,7 @@ class ReadLineNumberGeneraterTest {
         ReadLineNumberGenerater readLineNumberGenerater = new ReadLineNumberGenerater("0A");
         stringBuilder.append(MAX_NUM).append(ErrorCode.보다_클_수_없음.getErrorMessage());
         assertThatThrownBy(() -> {
-            readLineNumberGenerater.generateNumber(new RacingTime(2));
+            readLineNumberGenerater.generateNumber(new RacingTime("2"));
         }).isInstanceOf(IllegalArgumentException.class).hasMessage(stringBuilder.toString());
     }
 
@@ -40,7 +40,7 @@ class ReadLineNumberGeneraterTest {
         ReadLineNumberGenerater readLineNumberGenerater = new ReadLineNumberGenerater("0,2");
         stringBuilder.append(MIN_NUM).append(ErrorCode.보다_작을_수_없음.getErrorMessage());
         assertThatThrownBy(() -> {
-            readLineNumberGenerater.generateNumber(new RacingTime(3));
+            readLineNumberGenerater.generateNumber(new RacingTime("3"));
         }).isInstanceOf(IllegalArgumentException.class).hasMessage(stringBuilder.toString());
     }
 }

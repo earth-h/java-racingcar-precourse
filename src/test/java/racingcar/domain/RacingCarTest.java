@@ -19,7 +19,7 @@ public class RacingCarTest {
         List<String> readNumbers = Arrays.asList("135", "021", "875");
         List<RacingCar> racingCars = new ArrayList<>();
         for(int idx = 0; idx < 3; idx++) {
-            racingCars.add(new RacingCar(new RacingTime(3), new ReadLineNumberGenerater(readNumbers.get(idx)), racingCarNames.get(idx)));
+            racingCars.add(new RacingCar(new RacingTime("3"), new ReadLineNumberGenerater(readNumbers.get(idx)), racingCarNames.get(idx)));
         }
         Map<RacingCarName, RacingResult> racingResults = playRacingGame(racingCars);
         assertThat(racingResults.get(racingCarNames.get(0))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(STOP, STOP, FORWARD)));
@@ -29,7 +29,7 @@ public class RacingCarTest {
 
     @Test
     void 단일_자동차의_경주_결과_확인() {
-        RacingCar racingCar = new RacingCar(new RacingTime(3),  new ReadLineNumberGenerater("529"), new RacingCarName("bob"));
+        RacingCar racingCar = new RacingCar(new RacingTime("3"),  new ReadLineNumberGenerater("529"), new RacingCarName("bob"));
         RacingResult racingResult = racingCar.play();
         assertThat(racingResult).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(FORWARD, STOP, FORWARD)));
     }
