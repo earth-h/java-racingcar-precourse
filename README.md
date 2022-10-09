@@ -48,3 +48,4 @@
     }
     Map<RacingCarName, RacingResult> racingResults = play(racingCars); // RacingCar 클래스 내 static 메소드로 play 구현
   ```
+6. 전진일 경우 - 반환, 멈춤일 경우 빈 문자열 반환 로직 테스트
