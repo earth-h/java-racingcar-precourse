@@ -1,43 +1,31 @@
 package racingcar.domain;
 
-import static racingcar.domain.RacingNumber.convertToRacingNumber;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import racingcar.constant.ErrorCode;
+import static racingcar.domain.RacingStatus.printRacingStatus;
 
 public class RacingCar {
 
-    private final List<RacingNumber> racingNumbers;
+    private static final String PRINT_CURRENT_RACING_LOCATION = " : ";
+
     private final RacingCarName racingCarName;
+    private final RacingCarLocation racingCarLocation;
 
-    public RacingCar(RacingTime racingTime, NumberGenerator numberGenerator, RacingCarName racingCarName) {
-        racingNumbers = convertToRacingNumber(numberGenerator.generateNumber(racingTime));
-        validateRacingNumbersLength(racingTime);
+    public RacingCar(RacingCarName racingCarName) {
         this.racingCarName = racingCarName;
+        this.racingCarLocation = new RacingCarLocation();
     }
 
-    private void validateRacingNumbersLength(RacingTime racingTime) {
-        if(racingNumbers.size() != racingTime.getRacingTime()) {
-            throw new IllegalArgumentException(ErrorCode.RACING_TIME만큼_숫자가_생성되지_않음.getErrorMessage());
-        }
+    public RacingCarLocation getCurrentLocation() {
+        return racingCarLocation;
     }
 
-    public RacingResult play() {
-        List<RacingStatus> racingStatusList = new ArrayList<>();
-        for(RacingNumber racingNumber: racingNumbers) {
-            racingStatusList.add(RacingStatus.checkStatus(racingNumber));
-        }
-        return new RacingResult(racingStatusList);
+    public String playRacing(RacingNumber racingNumber) {
+        this.racingCarLocation.updateLocation(RacingStatus.checkStatus(racingNumber));
+        return printCurrentRacingLocation();
     }
 
-    public static Map<RacingCarName, RacingResult> playRacingGame(List<RacingCar> racingCars) {
-        Map<RacingCarName, RacingResult> racingResults = new HashMap<>();
-        for(RacingCar racingCar: racingCars) {
-            racingResults.put(racingCar.racingCarName, racingCar.play());
-        }
-        return racingResults;
+    public String printCurrentRacingLocation() {
+        StringBuilder stringBuilder = new StringBuilder().append(racingCarName.getRacingCarName()).append(PRINT_CURRENT_RACING_LOCATION);
+        stringBuilder.append(printRacingStatus(racingCarLocation));
+        return stringBuilder.toString();
     }
 }

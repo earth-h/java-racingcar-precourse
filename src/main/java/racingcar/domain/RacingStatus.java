@@ -11,6 +11,18 @@ public enum RacingStatus {
         this.racingStatusValue = racingStatusValue;
     }
 
+    public boolean isForward() {
+        return this == FORWARD;
+    }
+
+    public static String printRacingStatus(RacingCarLocation racingCarLocation) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int cnt = 0; cnt < racingCarLocation.getLocation(); cnt++) {
+            stringBuilder.append(FORWARD.racingStatusValue);
+        }
+        return stringBuilder.toString();
+    }
+
     public static RacingStatus checkStatus(RacingNumber racingNumber) {
         if(racingNumber.isForward()) {
             return RacingStatus.FORWARD;
@@ -21,4 +33,5 @@ public enum RacingStatus {
     public static String getRacingStatusValue(RacingStatus racingStatus) {
         return racingStatus.racingStatusValue;
     }
+
 }

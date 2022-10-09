@@ -16,6 +16,10 @@ public class RacingCarName {
         this.racingCarName = racingCarName;
     }
 
+    public String getRacingCarName() {
+        return racingCarName;
+    }
+
     private void validateRacingCarNameLength(String racingCarName) {
         if(racingCarName.length() > MAX_CAR_NAME) {
             throw new IllegalArgumentException(ErrorCode.자동차_이름은_5자_이하.getErrorMessage());

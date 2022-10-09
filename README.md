@@ -28,25 +28,28 @@
 1. 단일 숫자에 대해 3 이하일 경우 멈춤, 4 이상일 경우 전진 로직 테스트 
 2. 랜덤 숫자 생성 로직 테스트
   * 랜덤 숫자 범위 테스트 및 생성 개수 테스트
-3. 단일 자동차에 대해 시도할 횟수동안의 결과 반환 테스트
-  ```java
-    // 시도 횟수 받아서 그 횟수만큼 랜덤 수 갖는 RacingCar 객체 생성
-    // 실재로는 랜덤 수이지만, 테스트를 위해 ReadLineNumberGenerator 생성해서 직접 값 넣어서 테스트
-    RacingCar racingCar = new RacingCar(new RacingTime(int racingTime), new ReadLineNumberGenerater(Arrays.asList(...)), new RacingCarName(string racingCarName)); 
-    List<RacingStatus> racingResult = racingCar.play(); // RacingCar 객체의 실행결과를 담은 리스트 반환
-  ```
+3. 단일 자동차에 대해 경주 1회 결과 반환 테스트
+```java
+    RacingCar racingCar = new RacingCar(new RacingCarName("bob"));
+    racingCar.playRacing(new RacingNumber(number));
+```
 4. 자동차 이름 지정 로직 테스트
   * 자동차 이름이 1~5자 사이인지 테스트
-5. 여러 자동차에 대해 시도할 횟수동안의 결과 반환 테스트
-  ```java
-    List<RacingCarName> racingCarNames = new ArrayList<>(Arrays.asList(new RacingCarName("bob"), new RacingCarName("kebin")));
-    List<String> readNumbers = Arrays.asList("135", "249", "021");
-    List<RacingCar> racingCars = new ArrayList<>();
-    for(int idx = 0; idx < 3; idx++) {
-        // 실재로는 랜덤 수이지만, 테스트를 위해 ReadLineNumberGenerator 생성해서 직접 값 넣어서 테스트
-        racingCars.add(new RacingCar(new RacingTime(3), new ReadLineNumberGenerater(readNumbers.get(idx)), racingCarNames.get(idx)));
+5. 여러 자동차에 대해 1회 결과 반환 테스트
+```java
+    List<RacingCar> racingCars = Arrays.asList(new RacingCar(new RacingCarName("bob")), new RacingCar(new RacingCarName("cat")));
+    List<Integer> racingNumbers = Arrays.asList(3, 8);
+    for(int index = 0; index < racingCars.size(); index++) {
+        racingCars.get(index).playRacing(new RacingNumber(racingNumbers.get(index)));
     }
-    Map<RacingCarName, RacingResult> racingResults = play(racingCars); // RacingCar 클래스 내 static 메소드로 play 구현
   ```
-6. 전진일 경우 - 반환, 멈춤일 경우 빈 문자열 반환 로직 테스트
-7. 자동차 이름 쉼표(,) 단위로 split 테스트
+6. 단일 자동차에 대해 경주 2회 결과 반환 테스트
+   * 2회 수행 시, 출력될 결과 확인 테스트
+```java
+    RacingCar racingCar = new RacingCar(new RacingCarName("bob"));
+    racingCar.playRacing(new RacingNumber(1));
+    String racingResult = racingCar.playRacing(new RacingNumber(2));
+    assertThat(racingResult).isEqualTo("bob : ");
+```
+7. 전진일 경우 - 반환, 멈춤일 경우 빈 문자열 반환 로직 테스트
+8. 자동차 이름 쉼표(,) 단위로 split 테스트

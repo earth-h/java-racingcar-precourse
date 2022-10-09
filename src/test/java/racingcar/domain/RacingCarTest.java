@@ -1,36 +1,63 @@
 package racingcar.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static racingcar.domain.RacingCar.playRacingGame;
-import static racingcar.domain.RacingStatus.FORWARD;
-import static racingcar.domain.RacingStatus.STOP;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class RacingCarTest {
 
     @Test
-    void 여러_자동차의_경주_결과_확인() {
-        List<RacingCarName> racingCarNames = new ArrayList<>(Arrays.asList(new RacingCarName("bob"), new RacingCarName("kebin"), new RacingCarName("hi")));
-        List<String> readNumbers = Arrays.asList("135", "021", "875");
-        List<RacingCar> racingCars = new ArrayList<>();
-        for(int idx = 0; idx < 3; idx++) {
-            racingCars.add(new RacingCar(new RacingTime("3"), new ReadLineNumberGenerater(readNumbers.get(idx)), racingCarNames.get(idx)));
+    void 여러_자동차_경주_1회_결과_출력() {
+        List<RacingCar> racingCars = Arrays.asList(
+                new RacingCar(new RacingCarName("bob")), new RacingCar(new RacingCarName("cat")));
+        List<Integer> racingNumbers = Arrays.asList(9, 0);
+        List<String> racingResults = new ArrayList<>();
+        for(int index = 0; index < racingCars.size(); index++) {
+            racingResults.add(racingCars.get(index).playRacing(new RacingNumber(racingNumbers.get(index))));
         }
-        Map<RacingCarName, RacingResult> racingResults = playRacingGame(racingCars);
-        assertThat(racingResults.get(racingCarNames.get(0))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(STOP, STOP, FORWARD)));
-        assertThat(racingResults.get(racingCarNames.get(1))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(STOP, STOP, STOP)));
-        assertThat(racingResults.get(racingCarNames.get(2))).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(FORWARD, FORWARD, FORWARD)));
+        assertThat(racingResults.get(0)).isEqualTo("bob : -");
+        assertThat(racingResults.get(1)).isEqualTo("cat : ");
     }
 
     @Test
-    void 단일_자동차의_경주_결과_확인() {
-        RacingCar racingCar = new RacingCar(new RacingTime("3"),  new ReadLineNumberGenerater("529"), new RacingCarName("bob"));
-        RacingResult racingResult = racingCar.play();
-        assertThat(racingResult).usingRecursiveComparison().isEqualTo(new RacingResult(Arrays.asList(FORWARD, STOP, FORWARD)));
+    void 여러_자동차_경주_1회_결과_확인() {
+        List<RacingCar> racingCars = Arrays.asList(
+                new RacingCar(new RacingCarName("bob")), new RacingCar(new RacingCarName("cat")));
+        List<Integer> racingNumbers = Arrays.asList(3, 8);
+        for(int index = 0; index < racingCars.size(); index++) {
+            racingCars.get(index).playRacing(new RacingNumber(racingNumbers.get(index)));
+        }
+        assertThat(racingCars.get(0).getCurrentLocation().getLocation()).isEqualTo(0);
+        assertThat(racingCars.get(1).getCurrentLocation().getLocation()).isEqualTo(1);
     }
+
+    @Test
+    void 단일_자동차_경주_2회_결과_출력() {
+        RacingCar racingCar = new RacingCar(new RacingCarName("bob"));
+        racingCar.playRacing(new RacingNumber(1));
+        String racingResult = racingCar.playRacing(new RacingNumber(2));
+        assertThat(racingResult).isEqualTo("bob : ");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0", "1", "2", "3"})
+    void 단일_자동차_경주_1회_결과_멈춤(int number) {
+        RacingCar racingCar = new RacingCar(new RacingCarName("bob"));
+        racingCar.playRacing(new RacingNumber(number));
+        assertThat(racingCar.getCurrentLocation().getLocation()).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"4", "5", "6", "7", "8", "9"})
+    void 단일_자동차_경주_1회_결과_전진(int number) {
+        RacingCar racingCar = new RacingCar(new RacingCarName("bob"));
+        racingCar.playRacing(new RacingNumber(number));
+        assertThat(racingCar.getCurrentLocation().getLocation()).isEqualTo(1);
+    }
+
 }
